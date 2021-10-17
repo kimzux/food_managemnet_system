@@ -1,11 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
+<div class="jumbotron mb-0 rounded-0" style="height:100vh;">
+    <h1 class="display-5 text-center">Food Management System</h1>
 <div class="container">
-    <div class="row justify-content-center">
+    <div class=" py-4 row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

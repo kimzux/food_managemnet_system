@@ -20,3 +20,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login2', function () {
+    return view('log');
+});
+Route::get('/addstudent', function () {
+return view('student.addstudent');
+});
+
+Route::get('/create', function () {
+    return view('products.create');
+});
+
+
+Route::post('/addstudent', 'StudentController@store');
+Route::post('/editStudent', 'StudentController@update');
+Route::get('/home', 'dashboardController@index')->name('dashboard');
+Route::resource('/foodie', 'ProductController');
+Route::resource('/student', 'StudentController');
+// Route::get('/search', 'studentSearch@search')->name('search');
+ Route::get('/studentSearch', 'StudentController@search')->name('search');
