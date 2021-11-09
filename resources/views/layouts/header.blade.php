@@ -10,7 +10,7 @@
     <!-- Tell the browser to be responsive to screen width -->
    
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'hopac canteen') }}</title>
 
     <!-- Scripts -->
     

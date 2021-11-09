@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Order_product;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -16,5 +16,8 @@ class Product extends Model
 		
         
 	];
-    
+    public function order_product()
+	{
+		return $this->hasMany('App\Order_product');
+	}
 }

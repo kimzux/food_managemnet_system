@@ -95,8 +95,8 @@ public function destroy($id)
 public function search(Request $request)
 {
     $search= $request->get('search');
-    $student = DB::table('student')->where('registration_number', 'like','%'.$search.'%')->paginate(5);
-    return view('orders.studentSearch',['student'=> $student]);
+    $students = Student::where('registration_number', 'like','%'.$search.'%')->get();
+    return view('orders.studentSearch',['students'=> $students]);
 }
-      
-}
+
+}       

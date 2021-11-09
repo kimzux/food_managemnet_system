@@ -21,5 +21,11 @@ class Student extends Model
 		'gender',
         
 	];
+	
+
+	public function getFullNameAttribute()
+	{
+		return "{$this->first_name} {$this->last_name}";
+	}
 
 }

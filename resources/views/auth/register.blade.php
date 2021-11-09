@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="jumbotron mb-0 rounded-0" style="height:100vh;">
-    <h1 class="display-5 text-center">Food Management System</h1>
+    <h1 class="display-5 text-center">Hopac Canteen</h1>
 <div class="container">
     <div class=" py-4 row justify-content-center">
         <div class="col-md-8">
