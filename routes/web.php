@@ -44,5 +44,6 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/search', 'studentSearch@search')->name('search');
     Route::get('/studentSearch', 'StudentController@search')->name('search');
     Route::get('/choose_product/{student}', 'ProductController@order')->name('order');
+    Route::post('store_order/{student}', 'OrderController@store')->name('store_order');
     Route::post('/add_product', 'ProductController@productstore')->name('store');
 });
