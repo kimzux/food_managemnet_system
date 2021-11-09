@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/addstudent', 'StudentController@store');
     Route::post('/editStudent', 'StudentController@update');
-    Route::get('/home', 'dashboardController@index')->name('dashboard');
+    // Route::get('/home', 'dashboardController@index')->name('dashboard');
     Route::resource('/foodie', 'ProductController');
     Route::resource('/student', 'StudentController');
     // Route::get('/search', 'studentSearch@search')->name('search');
