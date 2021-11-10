@@ -15,12 +15,13 @@ class CreateOrderTable extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->integer('order_product_id');
-            $table->integer('order_no');
+            $table->foreignId('student_id')->constrained('student');
+            // $table->integer('order_product_id'); not needed
+            $table->integer('order_no')->nullable();
             $table->string('status');
             $table->double('total_price');
-             $table->timestamps();
+            $table->date('date');
+            $table->timestamps();
         });
     }
 
