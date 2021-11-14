@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Order_product;
 use App\Student;
+use App\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,7 +19,7 @@ class ProductController extends Controller
             $validatedData = $request->validate([
                 'productName' => 'required|max:255',
                 'productcategory' => 'required',
-                'productPrice' => 'required|numeric',
+                // 'productPrice' => 'required|numeric',
             ]);
             $show = Product::create($validatedData);
             Alert::success('Success!', 'Successfully added');
@@ -49,7 +50,7 @@ class ProductController extends Controller
         $validatedData =  $request->validate([
             'productName' => ['required', 'max:255', Rule::unique(Product::class, 'productName')->ignore($id)],
             'productcategory' => 'required',
-            'productPrice' => 'required|numeric',
+            // 'productPrice' => 'required|numeric',
         ]);
 
         Product::whereId($id)->update($validatedData);
@@ -109,4 +110,15 @@ class ProductController extends Controller
         Alert::success('Success!', 'Successfully added');
         return redirect()->back()->withSuccessMessage('success', 'Data Saved');
     }
+
+   
+//  public function productstock(Request $request){
+//   $productstock = new Stock();
+//   $productstock->product_id = request('productName');
+//   $productstock->quantity_rec=request('quantity_rec');
+//   $productstock->price=request('price');
+//   $productstock->save();
+//   Alert::success('Success!', 'Successfully added');
+//   return redirect()->back()->withSuccessMessage('success', 'Data Saved');
+// }
 }

@@ -24,29 +24,39 @@
           <div class="card bg-light mb-3" style="max-width: 50rem">
      <div class="align-items-center justify-content-between mb-4">
      <div class="card-body">
-      <form method="post" action="{{ route('foodie.update', $products->id ) }}">
+      <form method="post" action="{{ route('stock.update', $products->id ) }}">
           <div class="form-group row">
               @csrf
               @method('PATCH')
             
-              <label for="productName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
-              <div class="col-sm-8">
-              <input type="text" class="form-control" name="productName" value="{{ $products->productName }}"/>
-              </div>
-          </div>
-          <div class="form-group row">
-              <label for="productcategory" class="col-sm-2 col-form-label"><b>Product Category:</b></label>
-              <div class="col-sm-8">
-              <select class="form-control" name="productcategory">
-                <option value="">select</option>
-               
-                <option value="food" {{( $products->productcategory=== 'food') ? 'Selected' : ''}}>food</option>
-               <option value="drink" {{( $products->productcategory=== 'drink') ? 'Selected' : ''}}>drink</option>
-               <option value="snacks" {{( $products->productcategory=== 'snacks') ? 'Selected' : ''}}>snacks</option>
-                                                </select>
-              
-                                                </div>  
-                                              </div>
+              <div class="form-group row">
+                <label for="productName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
+                <div class="col-sm-6">
+                    <select class="form-control" name="productName">
+                        @foreach ($stock as $product)
+
+                            <option value="{{ $product->id }}"> {{ $product->productName }} </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="productquantity" class="col-sm-2 col-form-label"><b>Product quantity:</b></label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" name="quantity_rec" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="productprice" class="col-sm-2 col-form-label"><b>Product price:</b></label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" name="price" />
+                </div>
+            </div>
+
+           
+
               <!-- <textarea rows="5" columns="5" class="form-control" name="productcategory" value="{{ $products->productcategory }}"></textarea> -->
        
 

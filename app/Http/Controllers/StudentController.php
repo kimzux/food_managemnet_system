@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Student;
 use DB;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -98,5 +100,14 @@ public function search(Request $request)
     $students = Student::where('registration_number', 'like','%'.$search.'%')->get();
     return view('orders.studentSearch',['students'=> $students]);
 }
+public function import(Request $request) 
+{   
+
+    Excel::import(new StudentsImport,$request->select_file );
+    Alert::success('Success!', 'Successfully updated');
+    return redirect('/addstudent')->withSuccessMessage('Successfully added');
+   
+
 
 }       
+}

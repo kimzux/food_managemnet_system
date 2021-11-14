@@ -2,6 +2,7 @@
 
 namespace App;
 use Order_product;
+use Stock;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -11,7 +12,6 @@ class Product extends Model
     
 	protected $fillable = [
 		'productName',
-		'productPrice',
 		'productcategory',
 		
         
@@ -19,5 +19,9 @@ class Product extends Model
     public function order_product()
 	{
 		return $this->hasMany('App\Order_product');
+	}
+	public function stock()
+	{
+		return $this->hasOne('Stock:class');
 	}
 }

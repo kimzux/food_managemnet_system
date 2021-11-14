@@ -91,12 +91,20 @@
                                             <label for="ClassLevel" class="col-sm-2 col-form-label"><b>Class</b></label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" name="classlevel" id="inputEducationLevel">
-                                                    <option value="form 1">form 1</option>
-                                                    <option value="form 2">form 2</option>
-                                                    <option value="form 3">form 3</option>
-                                                    <option value="form 4">form 4</option>
-                                                    <option value="form 5">form 5</option>
-                                                    <option value="form 6">form 6</option>
+                                                    <option value="kindergatern">kindergatern</option>
+                                                    <option value="grade one">grade one</option>
+                                                    <option value="grade two">grade two</option>
+                                                    <option value="grade three">grade three</option>
+                                                    <option value="grade four">grade four</option>
+                                                    <option value="grade five">grade five</option>
+                                                    <option value="grade six">grade six</option>
+                                                    <option value="grade seven">grade two</option>
+                                                    <option value="grade eight">grade eight</option>
+                                                    <option value="grade nine">grade nine</option>
+                                                    <option value="grade ten">grade ten</option>
+                                                    <option value="grade eleven">grade eleven</option>
+                                                    <option value="grade twelve">grade twelve</option>
+                                        
                                                 </select>
                                             </div>
                                              </div>
@@ -117,13 +125,7 @@
                                                 </div>
                                                  </div>
                                                  
-                                                     <div class="form-group row">
-                                                        <label for="uploadImage" class="col-sm-2 col-form-label"><b>Photo</b></label>
-                                                        <div class="col-sm-8">
-                                                          <input type="file" class="form-control" id="uploadImage"  name="image"
-                                                          accept="image/png, image/jpeg ,image/jpg" required>
-                                                        </div>
-                                                         </div>
+                                                    
                                                          <div class="form-group row">
                                                             <label for="button" class="col-sm-2 col-form-label"></label>
                                                             <div class="col-sm-offset-8 col-sm-8">
@@ -146,10 +148,9 @@
                     </div>
                     <div class="card-body">
                       
-                      <h5 class="card-title">Download sample here <a href='<?=asset('sample.xlsx')?>'>Download</a>
-                    
+                      <h5 class="card-title">
                       <br><p class="card-text pt-4" >This part allows you to upload all students information.</p>
-                      <form method="post" action="admission" enctype="multipart/form-data">
+                      <form method="post" action="{{route('import')}}" enctype="multipart/form-data">
                       <input id="fileSelect" type="file" name="select_file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" /> 
                       <div class="col-sm-offset-8 col-sm-8">
                         <hr class="sidebar-divider d-none d-md-block">
@@ -157,6 +158,7 @@
                     </div>
                     <?=csrf_field()?>
                   </form> 
+                      </h5>
                     </div>
                   </div>
                   

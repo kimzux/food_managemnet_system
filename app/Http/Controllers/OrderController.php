@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         DB::transaction(function () use ($cart, $student) {
 
-            $total_price = $cart->sum(fn ($item) => $item->product->productPrice);
+            $total_price = $cart->sum(fn ($item) => $item->product->productPrice??0);
 
             $order = Order::create([
                 'student_id' => $student->id,

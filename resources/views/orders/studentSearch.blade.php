@@ -4,28 +4,15 @@
 
     <div class="tab-content mt-4">
         <div class="tab-pane fade show active" id="registration">
-            <div class="card bg-light mb-3" style="max-width: 40rem;">
-                <div class="card-body">
-                    <form class="form" action="/studentSearch" method="get" id="registrationForm"
-                        enctype="multipart/form-data">
-                        <div class="form-group row">
+       
+               
+                  
 
-                            <label for="inputAdmissionNumber" class="col-sm-2 col-form-label"><b>Admission Number</b></label>
-                            <div class="col-sm-8">
-
-                                <input type="text" class="form-control" name="search" id="inputAdmissionNumber"
-                                    placeholder="17023037010j" required><br>
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-
-                        </div>
-
-                </div>
-            </div>
+         
         </div>
     </div>
-    <?= csrf_field() ?>
-    </form>
+   
+   
     <table id="student_table" class="table table-striped">
         <thead>
             <tr>

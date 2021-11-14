@@ -17,14 +17,14 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-  <table class="table table-striped">
+  <table id="product_datatable" class="table table-striped">
     <thead>
         <tr>
           <td>ID</td>
           <td>Product Name</td>
           <td>Product Category</td>
-          <td>Product Price</td>
-          <td colspan="2">Action</td>
+          {{-- <td>Product Price</td> --}}
+          <td>Action</td>
         </tr>
     </thead>
     <tbody>
@@ -33,15 +33,17 @@
             <td>{{$product->id}}</td>
             <td>{{$product->productName}}</td>
             <td>{{$product->productcategory}}</td>
-            <td>{{$product->productPrice}}</td>
-            <td><a href="{{ route('foodie.edit', $product->id)}}" class="btn btn-primary">Edit</a></td>
+            {{-- <td>{{$product->productPrice}}</td> --}}
             <td>
+              <div class="d-flex">
+                <a href="{{ route('foodie.edit', $product->id)}}" class="btn btn-primary">Edit</a>
                 <form action="{{ route('foodie.destroy', $product->id)}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure  you want to delete?')">Delete</button>
+                  <button class="ml-4 btn btn-danger" type="submit" onclick="return confirm('Are you sure  you want to delete?')">Delete</button>
                   <?=csrf_field()?>
                 </form>
+              </div>
             </td>
         </tr>
         @endforeach
@@ -49,3 +51,9 @@
   </table>
 <div>
 @endsection
+
+@push('scripts')
+<script>
+    $('#product_datatable').DataTable({});
+</script>
+@endpush

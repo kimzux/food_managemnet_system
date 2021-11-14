@@ -43,20 +43,11 @@
                                                 <option value="">Select</option>
                                                     <option value="food">food</option>
                                                     <option value="drink">drink</option>
+                                                    <option value="snacks">snacks</option>
                                                 </select>
               
                                                 </div>  
-                                              </div>
-          <div class="form-group row">
-              <label for="productPrice" class="col-sm-2 col-form-label"><b>Product Price:</b></label>
-              <div class="col-sm-8">
-              <input type="text" class="form-control" name="productPrice"/>
-          </div>
-          </div>
-
-                  
-          
-                                                           
+                                              </div>                                              
         
           <div class="form-group row">
                   <label for="button" class="col-sm-2 col-form-label"></label>

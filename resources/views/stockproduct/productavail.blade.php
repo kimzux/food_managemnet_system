@@ -7,8 +7,8 @@
   }
 </style>
 <div class="container">
-<form style="display: inline" action="addstudent" method="get">
-  <button type="submit" class="btn btn-primary">Click here to add student</button>
+<form style="display: inline" action="stock" method="get">
+  <button type="submit" class="btn btn-primary">Click here to add product</button>
 </form>
 </div>
 <div class="uper">
@@ -17,28 +17,29 @@
       {{ session()->get('success') }}  
     </div><br />
   @endif
-  <table id="student_datatable" class="table table-striped">
+  <table id="product_datatable" class="table table-striped">
     <thead>
         <tr>
           <td>ID</td>
-          <td>First Name</td>
-          <td>Last Name </td>
-          <td>Class Level</td>
+          <td>Product Name</td>
+          <td>Product Quantity</td>
+          <td>Product price</td>
+          {{-- <td>Product Price</td> --}}
           <td>Action</td>
         </tr>
     </thead>
     <tbody>
-        @foreach($student as $student)
+        @foreach($product as $product)
         <tr>
-            <td>{{$student->id}}</td>
-            <td>{{$student->first_name}}</td>
-            <td>{{$student->last_name}}</td>
-            <td>{{$student->classlevel}}</td>
-            <div class="d-flex">
+            <td>{{$product->id}}</td>
+            <td>{{$product->productName}}</td>
+            <td>{{$product->quantity_rec}}</td>
+            <td>{{$product->price}}</td>
+            {{-- <td>{{$product->productPrice}}</td> --}}
             <td>
               <div class="d-flex">
-                <a href="{{ route('student.edit', $student->id)}}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('student.destroy', $student->id)}}" method="post">
+                <a href="{{ route('stock.edit', $product->id)}}" class="btn btn-primary">Edit</a>
+                <form action="{{ route('stock.destroy', $product->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="ml-4 btn btn-danger" type="submit" onclick="return confirm('Are you sure  you want to delete?')">Delete</button>
@@ -46,15 +47,15 @@
                 </form>
               </div>
             </td>
-        
         </tr>
         @endforeach
     </tbody>
   </table>
 <div>
 @endsection
+
 @push('scripts')
 <script>
-    $('#student_datatable').DataTable({});
+    $('#product_datatable').DataTable({});
 </script>
 @endpush

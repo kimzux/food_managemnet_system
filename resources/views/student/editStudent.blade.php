@@ -78,12 +78,19 @@
                                             <label for="ClassLevel" class="col-sm-2 col-form-label"><b>Class</b></label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" name="classlevel" id="inputEducationLevel">
-                                                    <option value="form 1" {{( $student->classlevel=== 'form1') ? 'Selected' : ''}}>form 1</option>
-                                                    <option value="form 2" {{( $student->classlevel=== 'form2') ? 'Selected' : ''}}>form 2</option>
-                                                    <option value="form 3" {{( $student->classlevel=== 'form3') ? 'Selected' : ''}}>form 3</option>
-                                                    <option value="form 4" {{( $student->classlevel=== 'form4') ? 'Selected' : ''}}>form 4</option>
-                                                    <option value="form 5" {{( $student->classlevel=== 'form5') ? 'Selected' : ''}}>form 5</option>
-                                                    <option value="form 6" {{( $student->classlevel=== 'form6') ? 'Selected' : ''}}>form 6</option>
+                                                    <option value="kindergatern" {{( $student->classlevel=== 'kindergatern') ? 'Selected' : ''}}>kindergatern</option>
+                                                    <option value="grade one" {{( $student->classlevel=== 'gradeone') ? 'Selected' : ''}}>grade one</option>
+                                                    <option value="grade two" {{( $student->classlevel=== 'gradetwo') ? 'Selected' : ''}}>grade two</option>
+                                                    <option value="grade three" {{( $student->classlevel=== 'gradethree') ? 'Selected' : ''}}>grade three</option>
+                                                    <option value="grade four" {{( $student->classlevel=== 'gradefour') ? 'Selected' : ''}}>grade four</option>
+                                                    <option value="grade five" {{( $student->classlevel=== 'gradefive') ? 'Selected' : ''}}>grade five</option>
+                                                    <option value="grade six" {{( $student->classlevel=== 'gradesix') ? 'Selected' : ''}}>grade six</option>
+                                                    <option value="grade seven" {{( $student->classlevel=== 'gradeseven') ? 'Selected' : ''}}>grade seven</option>
+                                                    <option value="grade eight" {{( $student->classlevel=== 'gradeeight') ? 'Selected' : ''}}>grade eight</option>
+                                                    <option value="grade nine" {{( $student->classlevel=== 'gradenine') ? 'Selected' : ''}}>grade nine</option>
+                                                    <option value="grade ten" {{( $student->classlevel=== 'gradeten') ? 'Selected' : ''}}>grade ten</option>
+                                                    <option value="grade eleven" {{( $student->classlevel=== 'gradeeleven') ? 'Selected' : ''}}>grade eleven</option>
+                                                    <option value="grade twelve" {{( $student->classlevel=== 'gradetwelve') ? 'Selected' : ''}}>grade twelve</option>
                                                 </select>
                                             </div>
                                              </div>
@@ -104,13 +111,7 @@
                                                 </div>
                                                  </div>
                                                  
-                                                     <div class="form-group row">
-                                                        <label for="uploadImage" class="col-sm-2 col-form-label"><b>Photo</b></label>
-                                                        <div class="col-sm-8">
-                                                          <input type="file" class="form-control" id="uploadImage"  name="image" value="{{ $student->image }}"
-                                                          accept="image/png, image/jpeg ,image/jpg" required>
-                                                        </div>
-                                                         </div>
+                                                     
                                                          <div class="form-group row">
                                                             <label for="button" class="col-sm-2 col-form-label"></label>
                                                             <div class="col-sm-offset-8 col-sm-8">

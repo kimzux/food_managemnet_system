@@ -38,12 +38,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/addstudent', 'StudentController@store');
     Route::post('/editStudent', 'StudentController@update');
-    // Route::get('/home', 'dashboardController@index')->name('dashboard');
+    Route::get('/home', 'HomeController@total_student')->name('dashboard');
     Route::resource('/foodie', 'ProductController');
     Route::resource('/student', 'StudentController');
+   
+    Route::post('/import', 'StudentController@import')->name('import');
+    
     // Route::get('/search', 'studentSearch@search')->name('search');
     Route::get('/studentSearch', 'StudentController@search')->name('search');
     Route::get('/choose_product/{student}', 'ProductController@order')->name('order');
     Route::post('store_order/{student}', 'OrderController@store')->name('store_order');
     Route::post('/add_product', 'ProductController@productstore')->name('store');
+    Route::get('/stock', 'StockController@stock_manage')->name('stock');
+    Route::post('/productstock', 'StockController@productstock')->name('productstock');
 });
+
