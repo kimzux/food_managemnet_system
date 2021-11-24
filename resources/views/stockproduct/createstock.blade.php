@@ -25,7 +25,7 @@
         <div class="card bg-light mb-3" style="max-width: 50rem">
             <div class="align-items-center justify-content-between mb-4">
                 <div class="card-body">
-                    <form method="post" action="{{ route('productstock') }}">
+                    <form method="post" action="{{ route('stock.store') }}">
                         <div class="form-group row">
                             <label for="productName" class="col-sm-2 col-form-label"><b>Product Name:</b></label>
                             <div class="col-sm-6">

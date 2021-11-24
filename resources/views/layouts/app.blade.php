@@ -91,7 +91,7 @@
                         <a class="collapse-item" href="foodie">
                             Products
                         </a>
-                        <a class="collapse-item" href="{{route('stock')}}">stock</a>
+                        <a class="collapse-item" href="stock">stock</a>
                       </div>
                     </div>
                   </li>

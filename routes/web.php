@@ -49,7 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/choose_product/{student}', 'ProductController@order')->name('order');
     Route::post('store_order/{student}', 'OrderController@store')->name('store_order');
     Route::post('/add_product', 'ProductController@productstore')->name('store');
-    Route::get('/stock', 'StockController@stock_manage')->name('stock');
-    Route::post('/productstock', 'StockController@productstock')->name('productstock');
+    Route::get('/createstock', 'StockController@stock_manage')->name('stock');
+    Route::post('/createstock', 'StockController@store')->name('store');
+    Route::resource('/stock', 'StockController');
+    Route::post('/stock_edit', 'StockController@update')->name('update');
+    ;
 });
 

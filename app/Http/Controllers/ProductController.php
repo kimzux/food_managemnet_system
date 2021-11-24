@@ -6,6 +6,7 @@ use App\Product;
 use App\Order_product;
 use App\Student;
 use App\Stock;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -86,7 +87,12 @@ class ProductController extends Controller
 
     public function order(Student $student)
     {
-        $products = product::all();
+        $products = Product::select('id', 'productName')->whereHas('stock', function (Builder $has) {
+            $has->where('quantity_rec',  '>', 0);
+        })->with(['stock' => function ($stock) {
+            $stock->sumQuantity();
+        }])->get();
+        
         return view('orders.choose_product', compact('products', 'student'));
     }
 
@@ -111,14 +117,14 @@ class ProductController extends Controller
         return redirect()->back()->withSuccessMessage('success', 'Data Saved');
     }
 
-   
-//  public function productstock(Request $request){
-//   $productstock = new Stock();
-//   $productstock->product_id = request('productName');
-//   $productstock->quantity_rec=request('quantity_rec');
-//   $productstock->price=request('price');
-//   $productstock->save();
-//   Alert::success('Success!', 'Successfully added');
-//   return redirect()->back()->withSuccessMessage('success', 'Data Saved');
-// }
+
+    //  public function productstock(Request $request){
+    //   $productstock = new Stock();
+    //   $productstock->product_id = request('productName');
+    //   $productstock->quantity_rec=request('quantity_rec');
+    //   $productstock->price=request('price');
+    //   $productstock->save();
+    //   Alert::success('Success!', 'Successfully added');
+    //   return redirect()->back()->withSuccessMessage('success', 'Data Saved');
+    // }
 }

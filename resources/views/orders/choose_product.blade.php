@@ -30,6 +30,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Qnt</th>
+                        <th>Available Qnt</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -99,6 +100,14 @@
                 },
                 {
                     data: 'qnt'
+                },
+                {
+                    data: 'product.stock', render: function(stock){
+                        if(!stock){
+                            return 0;
+                        }
+                        return stock[0].total_qnt;
+                    }
                 },
                 {
                     data: 'product',

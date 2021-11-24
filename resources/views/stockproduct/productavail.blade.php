@@ -7,9 +7,10 @@
   }
 </style>
 <div class="container">
-<form style="display: inline" action="stock" method="get">
-  <button type="submit" class="btn btn-primary">Click here to add product</button>
+<form style="display: inline" action="createstock" method="get">
+  <button type="submit" class="btn btn-primary">Click here to add product in stock</button>
 </form>
+
 </div>
 <div class="uper">
   @if(session()->get('success'))
@@ -29,20 +30,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($product as $product)
+        @foreach($stocks as $stock)
+         <div class="section">
         <tr>
-            <td>{{$product->id}}</td>
-            <td>{{$product->productName}}</td>
-            <td>{{$product->quantity_rec}}</td>
-            <td>{{$product->price}}</td>
+            <td>{{$stock->id}}</td>
+            <td>{{$stock->product->productName}}</td>
+            <td>{{$stock->total_qnt}}</td>
+            <td>{{$stock->price??''}}</td>
             {{-- <td>{{$product->productPrice}}</td> --}}
             <td>
               <div class="d-flex">
-                <a href="{{ route('stock.edit', $product->id)}}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('stock.destroy', $product->id)}}" method="post">
+                <a href="{{ route('stock.edit', $stock->id)}}" class="btn btn-primary">Edit</a>
+                <form action="{{ route('stock.destroy', $stock->id)}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="ml-4 btn btn-danger" type="submit" onclick="return confirm('Are you sure  you want to delete?')">Delete</button>
+                  {{-- <button class="ml-4 btn btn-danger" type="submit" onclick="return confirm('Are you sure  you want to delete?')">Delete</button> --}}
                   <?=csrf_field()?>
                 </form>
               </div>

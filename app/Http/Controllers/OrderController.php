@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Stock;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class OrderController extends Controller
 
         DB::transaction(function () use ($cart, $student) {
 
-            $total_price = $cart->sum(fn ($item) => $item->product->productPrice??0);
+            $total_price = $cart->sum(fn ($item) => $item->product->stock->price ?? 0);
 
             $order = Order::create([
                 'student_id' => $student->id,
@@ -33,14 +34,44 @@ class OrderController extends Controller
             //insert order number
             $order->update(['order_no' => $order_number . $order->id]);
 
-            $order_products_data = $cart->map(fn ($item) => [
-                'order_id' => $order->id,
-                'product_id' => $item->product->id,
-                'price' => $item->product->productPrice,
-                'quantity' => $item->qnt,
-            ]);
+            foreach ($cart as $item) {
 
-            $order->products()->createMany($order_products_data->toArray());
+                $stocks = Stock::where('product_id', $item->product->id)->where('quantity_rec', '>', 0)->get();
+
+                if ($stocks->isEmpty()) {
+                    Alert::error('Error', 'Stock is missing in product');
+                    return back();
+                    break;
+                }
+
+                if ($stocks->sum(fn ($val) => $val->quantity_rec) < $item->qnt) {
+                    Alert::error('Error', 'Quantity order is greater than available');
+                    return back();
+                    break;
+                }
+
+                $order->products()->create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product->id,
+                    'price' => $item->product->stock->price ?? 0,
+                    'quantity' => $item->qnt,
+                ]);
+
+                $qnt = $item->qnt;
+                foreach ($stocks as $stock) {
+                    if ($qnt == 0) {
+                        break;
+                    }
+
+                    if ($stock->quantity_rec >= $qnt) {
+                        $stock->update(['quantity_rec' => $stock->quantity_rec - $qnt]);
+                        break;
+                    }
+
+                    $qnt = $qnt - $stock->quantity_rec;
+                    $stock->update(['quantity_rec' => 0]);
+                }
+            }
         });
 
         Alert::success('Success!', 'Successfully added');

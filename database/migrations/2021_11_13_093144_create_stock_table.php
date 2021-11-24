@@ -16,7 +16,7 @@ class CreateStockTable extends Migration
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->string('quantity_rec');
+            $table->double('quantity_rec');
             $table->double('price');
 
             $table->timestamps();
