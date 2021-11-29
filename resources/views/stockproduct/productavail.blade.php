@@ -40,7 +40,7 @@
             {{-- <td>{{$product->productPrice}}</td> --}}
             <td>
               <div class="d-flex">
-                <a href="{{ route('stock.edit', $stock->id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('detail', $stock->product_id)}}"class="btn btn-primary">Details</a>
                 <form action="{{ route('stock.destroy', $stock->id)}}" method="post">
                   @csrf
                   @method('DELETE')

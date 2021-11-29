@@ -19,60 +19,67 @@ class OrderController extends Controller
 
         $cart = collect(json_decode($request->cart));
 
-        DB::transaction(function () use ($cart, $student) {
+        $error_message = null;
 
-            $total_price = $cart->sum(fn ($item) => $item->product->stock->price ?? 0);
+        DB::beginTransaction();
 
-            $order = Order::create([
-                'student_id' => $student->id,
-                'status' => Order::TAKEN,
-                'total_price' => $total_price,
-                'date' => now()->format('Y-m-d'),
+        $total_price = $cart->sum(fn ($item) => $item->product->stock->price ?? 0);
+
+        $order = Order::create([
+            'student_id' => $student->id,
+            'status' => Order::TAKEN,
+            'total_price' => $total_price,
+            'date' => now()->format('Y-m-d'),
+        ]);
+
+        $order_number = now()->format('y') . now()->month . now()->day;
+        //insert order number
+        $order->update(['order_no' => $order_number . $order->id]);
+
+        foreach ($cart as $item) {
+
+            $stocks = Stock::where('product_id', $item->product->id)->where('quantity_rec', '>', 0)->get();
+
+            if ($stocks->isEmpty()) {
+                $error_message = 'Stock is missing in product';
+                DB::rollBack();
+                break;
+            }
+
+            if ($stocks->sum(fn ($val) => $val->quantity_rec) < $item->qnt) {
+                $error_message = 'Quantity order is greater than available';
+                DB::rollBack();
+                break;
+            }
+
+            $order->products()->create([
+                'order_id' => $order->id,
+                'product_id' => $item->product->id,
+                'price' => $item->product->stock->price ?? 0,
+                'quantity' => $item->qnt,
             ]);
 
-            $order_number = now()->format('y') . now()->month . now()->day;
-            //insert order number
-            $order->update(['order_no' => $order_number . $order->id]);
-
-            foreach ($cart as $item) {
-
-                $stocks = Stock::where('product_id', $item->product->id)->where('quantity_rec', '>', 0)->get();
-
-                if ($stocks->isEmpty()) {
-                    Alert::error('Error', 'Stock is missing in product');
-                    return back();
+            $qnt = $item->qnt;
+            foreach ($stocks as $stock) {
+                if ($qnt == 0) {
                     break;
                 }
 
-                if ($stocks->sum(fn ($val) => $val->quantity_rec) < $item->qnt) {
-                    Alert::error('Error', 'Quantity order is greater than available');
-                    return back();
+                if ($stock->quantity_rec >= $qnt) {
+                    $stock->update(['quantity_rec' => $stock->quantity_rec - $qnt]);
                     break;
                 }
 
-                $order->products()->create([
-                    'order_id' => $order->id,
-                    'product_id' => $item->product->id,
-                    'price' => $item->product->stock->price ?? 0,
-                    'quantity' => $item->qnt,
-                ]);
-
-                $qnt = $item->qnt;
-                foreach ($stocks as $stock) {
-                    if ($qnt == 0) {
-                        break;
-                    }
-
-                    if ($stock->quantity_rec >= $qnt) {
-                        $stock->update(['quantity_rec' => $stock->quantity_rec - $qnt]);
-                        break;
-                    }
-
-                    $qnt = $qnt - $stock->quantity_rec;
-                    $stock->update(['quantity_rec' => 0]);
-                }
+                $qnt = $qnt - $stock->quantity_rec;
+                $stock->update(['quantity_rec' => 0]);
             }
-        });
+        }
+        DB::commit();
+
+        if ($error_message) {
+            Alert::error('Error!', $error_message);
+            return back();
+        }
 
         Alert::success('Success!', 'Successfully added');
         return redirect(route('search'));

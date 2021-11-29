@@ -26,7 +26,7 @@ Route::get('/login2', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/addstudent', function () {
         return view('student.addstudent');
@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create', function () {
         return view('products.create');
     });
-
+    Route::get('/student', 'StudentController@index')->name('student');
     Route::post('/addstudent', 'StudentController@store');
     Route::post('/editStudent', 'StudentController@update');
     Route::get('/home', 'HomeController@total_student')->name('dashboard');
@@ -52,7 +52,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/createstock', 'StockController@stock_manage')->name('stock');
     Route::post('/createstock', 'StockController@store')->name('store');
     Route::resource('/stock', 'StockController');
-    Route::post('/stock_edit', 'StockController@update')->name('update');
-    ;
+    Route::get('/stock_details/{id}', 'StockController@detail')->name('detail');
+    Route::post('/stock_details', 'StockController@update')->name('update');
+    // Route::get('/stock_details', 'StockController@edit')->name('edit');
+    
 });
 

@@ -63,7 +63,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Request::url() == url('home') ? 'active' : '' }}">
-                <a class="nav-link" href="/home">
+                <a class="nav-link" href="{{route('home')}}">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -98,7 +98,7 @@
              
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ Request::url() == url('studentSearch') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/studentSearch" data-toggle="collapse" data-target="#collapsePages"
+                <a class="nav-link collapsed" href="{{route('search')}}" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" >
                     <i class="fas fa-fw fa-folder"></i>
                     <span>sales Details</span>

@@ -36,7 +36,7 @@ class StockController extends Controller
     public function index()
     {
 
-        $stocks = Stock::with('product')->sumQuantity()->get();
+        $stocks= Stock::with('product')->sumQuantity()->get();
 
         return view('stockproduct.productavail', compact('stocks'));
     }
@@ -50,19 +50,27 @@ class StockController extends Controller
     }
     public function edit($id)
     {
-        $stock = Stock::findOrFail($id);
+        $stock =Stock::findOrFail($id);
+       
+        // $stock = Product::select('id', 'productName')->get();
 
-        return view('stockproduct.stock_edit', compact('stock'));
+        return view('stockproduct.stock_details', compact('stock'));
+    }
+    public function detail($id)
+    {
+        // $product =Product::findOrFail('productName');
+        $stocks= Stock::with('product')->where('product_id',$id)->get();
+
+        return view('stockproduct.stock_details', compact('stocks'));
     }
     public function update(Request $request, $id)
     {
         $productstock = new Stock();
-        $productstock->product_id = request('productName');
         $productstock->quantity_rec = request('quantity_rec');
         $productstock->price = request('price');
         $productstock->save();
         Alert::success('Success!', 'Successfully added');
-        return redirect('/stock')->withSuccessMessage('Successfully updated');
+        return redirect('stockproduct.stock_details')->withSuccessMessage('Successfully updated');
 
 
         // Product::whereId($id)->update($validatedData);
