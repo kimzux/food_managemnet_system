@@ -62,7 +62,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Request::url() == url('home') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::url() == url('/home') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('home')}}">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Dashboard</span></a>
@@ -73,8 +73,8 @@
 
 
 
-            <li class="nav-item {{ Request::url() == url('student') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/student">
+            <li class="nav-item {{ Request::url() == url('students') ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="{{route('student')}}">
                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                     <span>Students</span>
                 </a>
@@ -88,7 +88,7 @@
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                       <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="foodie">
+                        <a class="collapse-item" href="{{route('foodie')}}">
                             Products
                         </a>
                         <a class="collapse-item" href="stock">stock</a>
@@ -106,8 +106,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/studentSearch">choose products</a>
-                        <a class="collapse-item" href="register.html">Order Details</a>
+                        <a class="collapse-item" href="{{route('search')}}">choose products</a>
+                        <a class="collapse-item" href="{{route('order_detail')}}">Order Details</a>
                         <a class="collapse-item" href="register.html">generate invoice</a>
                     </div>
             </li>

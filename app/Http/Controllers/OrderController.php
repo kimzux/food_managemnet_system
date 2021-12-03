@@ -84,4 +84,19 @@ class OrderController extends Controller
         Alert::success('Success!', 'Successfully added');
         return redirect(route('search'));
     }
+    public function index()
+    {
+
+        $order = Order::with(['student'])->get();
+
+        return view('orders.order_details', compact('order'));
+    }
+    public function view_order($id)
+    {
+        //  $order=Order::findOrFail($id);
+     
+         $order = Order::findOrFail($id);
+        //  dd($order);
+         return view('orders.view_order', compact('order'));
+    }
 }

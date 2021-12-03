@@ -31,12 +31,12 @@ class StockController extends Controller
         $productstock->price = request('price');
         $productstock->save();
         Alert::success('Success!', 'Successfully added');
-        return redirect('/stock')->withSuccessMessage('Successfully added');
+        return redirect('/stock');
     }
     public function index()
     {
 
-        $stocks= Stock::with('product')->sumQuantity()->get();
+        $stocks = Stock::with('product')->sumQuantity()->get();
 
         return view('stockproduct.productavail', compact('stocks'));
     }
@@ -45,13 +45,13 @@ class StockController extends Controller
         $stock = Stock::findOrFail($id);
         $stock->delete();
         Alert::success('Success!', 'Successfully deleted');
-        return redirect('/stock')->withSuccessMessage('Successfully deleted');
+        return redirect('/stock');
         // return redirect('/foodie')->with('success', 'Corona Case Data is successfully deleted');
     }
     public function edit($id)
     {
-        $stock =Stock::findOrFail($id);
-       
+        $stock = Stock::findOrFail($id);
+
         // $stock = Product::select('id', 'productName')->get();
 
         return view('stockproduct.stock_details', compact('stock'));
@@ -59,23 +59,17 @@ class StockController extends Controller
     public function detail($id)
     {
         // $product =Product::findOrFail('productName');
-        $stocks= Stock::with('product')->where('product_id',$id)->get();
+        $stocks = Stock::with('product')->where('product_id', $id)->get();
 
         return view('stockproduct.stock_details', compact('stocks'));
     }
     public function update(Request $request, $id)
     {
-        $productstock = new Stock();
-        $productstock->quantity_rec = request('quantity_rec');
-        $productstock->price = request('price');
-        $productstock->save();
-        Alert::success('Success!', 'Successfully added');
-        return redirect('stockproduct.stock_details')->withSuccessMessage('Successfully updated');
-
-
-        // Product::whereId($id)->update($validatedData);
-        // Alert::success('Success!', 'Successfully updated');
-        // return redirect('/foodie')->withSuccessMessage('Successfully updated');
-
+        $stock = Stock::findOrFail($id);
+        $stock->quantity_rec = $request->input('quantity_rec');
+        $stock ->price= $request->input('price');
+        $stock->save();
+        Alert::success('Success!', 'Successfully updated');
+        return back();
     }
 }

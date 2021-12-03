@@ -27,13 +27,13 @@ class StudentController extends Controller
     // $student->image= request('image')->nullable;
     $student->save();
     Alert::success('Success!', 'Successfully added');
-    return redirect('/student')->withSuccessMessage('Successfully added');
+    return redirect('/student');
     // return redirect()->back()->withSuccessMessage('Successfully added');
     
     }
     else{
       Alert::warning('Warning', 'Student already exist');
-      return redirect()->back()->withWarningMessage('Student already exist');
+      return redirect()->back();
      }
   
   
@@ -51,7 +51,7 @@ class StudentController extends Controller
     {
             $student = Student::all();
     
-            return view('student.all', compact('student'));
+            return view('student.students', compact('student'));
     }
     public function edit($id)
 {
@@ -77,7 +77,7 @@ $student->phone_number=request('phone_number');
 // $student->image= request('image')->nullable;
 $student->save(); 
 Alert::success('Success!', 'Successfully updated');
-return redirect('/student')->withSuccessMessage('Successfully updated');
+return redirect('/student');
 // return redirect('/foodie')->with('success', 'Corona Case Data is successfully updated');
 }
 
@@ -91,7 +91,7 @@ public function destroy($id)
         $student = student::findOrFail($id);
         $student->delete();
         Alert::success('Success!', 'Successfully deleted');
-        return redirect('/student')->withSuccessMessage('Successfully deleted');
+        return redirect('/student');
         // return redirect('/foodie')->with('success', 'Corona Case Data is successfully deleted');
 }
 public function search(Request $request)
@@ -105,7 +105,7 @@ public function import(Request $request)
 
     Excel::import(new StudentsImport,$request->select_file );
     Alert::success('Success!', 'Successfully updated');
-    return redirect('/addstudent')->withSuccessMessage('Successfully added');
+    return redirect('/addstudent');
    
 
 

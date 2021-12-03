@@ -11,7 +11,8 @@ class DashboardController extends Controller
     public function index()
     {
         $this->data['total_students'] = Student::all()->count();
-        return view('home', $this->data);
+        dd($this);
+        // return view('home', $this->data);
     }
     
 }

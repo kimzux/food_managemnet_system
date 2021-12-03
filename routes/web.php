@@ -26,7 +26,9 @@ Route::get('/login2', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home'); 
+    Route::get('/home', 'HomeController@total_student')->name('home'); 
+ 
 
     Route::get('/addstudent', function () {
         return view('student.addstudent');
@@ -38,13 +40,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/student', 'StudentController@index')->name('student');
     Route::post('/addstudent', 'StudentController@store');
     Route::post('/editStudent', 'StudentController@update');
-    Route::get('/home', 'HomeController@total_student')->name('dashboard');
+   
+
     Route::resource('/foodie', 'ProductController');
     Route::resource('/student', 'StudentController');
    
     Route::post('/import', 'StudentController@import')->name('import');
+    Route::get('/students', 'StudentController@index')->name('student');
     
     // Route::get('/search', 'studentSearch@search')->name('search');
+    Route::get('/foodie', 'ProductController@index')->name('foodie');
     Route::get('/studentSearch', 'StudentController@search')->name('search');
     Route::get('/choose_product/{student}', 'ProductController@order')->name('order');
     Route::post('store_order/{student}', 'OrderController@store')->name('store_order');
@@ -53,7 +58,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/createstock', 'StockController@store')->name('store');
     Route::resource('/stock', 'StockController');
     Route::get('/stock_details/{id}', 'StockController@detail')->name('detail');
-    Route::post('/stock_details', 'StockController@update')->name('update');
+    Route::post('/stock_details', 'StockController@update')->name('details_update');
+    Route::get('/order_details', 'OrderController@index')->name('order_detail');
+    Route::get('/view_order/{id}', 'OrderController@view_order')->name('view_order');
+
     // Route::get('/stock_details', 'StockController@edit')->name('edit');
     
 });
