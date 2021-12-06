@@ -14,7 +14,7 @@ class AddPriceColumn extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->double('productPrice', 12, 2);
+            $table->double('productPrice', 12, 2)->nullable();
         });
     }
 
