@@ -46,13 +46,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="productprice" class="col-sm-2 col-form-label"><b>Product price:</b></label>
-                            <div class="col-sm-4">
-                                <input type="number" class="form-control" name="price" />
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="button" class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-offset-8 col-sm-8">
                                 <button type="submit" class="btn btn-primary">Add Data</button>

@@ -23,7 +23,7 @@
           <td>ID</td>
           <td>Product Name</td>
           <td>Product Category</td>
-          {{-- <td>Product Price</td> --}}
+          <td>Product Price</td>
           <td>Action</td>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
             <td>{{$product->id}}</td>
             <td>{{$product->productName}}</td>
             <td>{{$product->productcategory}}</td>
-            {{-- <td>{{$product->productPrice}}</td> --}}
+            <td>{{$product->productPrice}}</td>
             <td>
               <div class="d-flex">
                 <a href="{{ route('foodie.edit', $product->id)}}" class="btn btn-primary">Edit</a>

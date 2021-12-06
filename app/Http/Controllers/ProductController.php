@@ -20,11 +20,11 @@ class ProductController extends Controller
             $validatedData = $request->validate([
                 'productName' => 'required|max:255',
                 'productcategory' => 'required',
-                // 'productPrice' => 'required|numeric',
+                'productPrice' => 'required|numeric',
             ]);
             $show = Product::create($validatedData);
             Alert::success('Success!', 'Successfully added');
-            return redirect('/foodie')->withSuccessMessage('Successfully added');
+            return redirect('/foodie');
             //   return redirect('/foodie')->with('success', 'Corona Case is successfully saved');
         } else {
             Alert::warning('Warning', 'product already exist');
@@ -51,12 +51,12 @@ class ProductController extends Controller
         $validatedData =  $request->validate([
             'productName' => ['required', 'max:255', Rule::unique(Product::class, 'productName')->ignore($id)],
             'productcategory' => 'required',
-            // 'productPrice' => 'required|numeric',
+            'productPrice' => 'required|numeric',
         ]);
 
         Product::whereId($id)->update($validatedData);
         Alert::success('Success!', 'Successfully updated');
-        return redirect('/foodie')->withSuccessMessage('Successfully updated');
+        return redirect('/foodie');
 
         // $check = Product::where('productName',  request('productName'))->first();
 
@@ -92,7 +92,7 @@ class ProductController extends Controller
         })->with(['stock' => function ($stock) {
             $stock->sumQuantity();
         }])->get();
-        
+
         return view('orders.choose_product', compact('products', 'student'));
     }
 

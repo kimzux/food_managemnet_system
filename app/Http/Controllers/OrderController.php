@@ -24,7 +24,7 @@ class OrderController extends Controller
 
         DB::beginTransaction();
 
-        $total_price = $cart->sum(fn ($item) => $item->product->stock->price ?? 0);
+        $total_price = $cart->sum(fn ($item) => $item->product->productPrice ?? 0);
 
         $order = Order::create([
             'student_id' => $student->id,
@@ -56,7 +56,7 @@ class OrderController extends Controller
             $order->products()->create([
                 'order_id' => $order->id,
                 'product_id' => $item->product->id,
-                'price' => $item->product->stock->price ?? 0,
+                'price' => $item->product->productPrice ?? 0,
                 'quantity' => $item->qnt,
             ]);
 
@@ -94,10 +94,9 @@ class OrderController extends Controller
     }
     public function view_order($id)
     {
-        
-     
-         $order = Order::findOrFail($id);
+    
+        $order = Order::findOrFail($id);
         //  dd($order);
-         return view('orders.view_order', compact('order'));
+        return view('orders.view_order', compact('order'));
     }
 }

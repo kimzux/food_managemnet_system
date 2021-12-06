@@ -24,7 +24,6 @@
           <td>ID</td>
           <td>Product Name</td>
           <td>Product Quantity</td>
-          <td>Product price</td>
           {{-- <td>Product Price</td> --}}
           <td>Action</td>
         </tr>
@@ -36,7 +35,6 @@
             <td>{{$stock->id}}</td>
             <td>{{$stock->product->productName}}</td>
             <td>{{$stock->total_qnt}}</td>
-            <td>{{$stock->price??''}}</td>
             {{-- <td>{{$product->productPrice}}</td> --}}
             <td>
               <div class="d-flex">
