@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-use Product;
 use Illuminate\Database\Eloquent\Model;
 
 class Order_product extends Model
@@ -12,6 +11,7 @@ class Order_product extends Model
 	protected $fillable = [
 		'product_id',
 		'quantity',
+		'order_id',
 		'price',
 		 'date',
         
@@ -21,7 +21,10 @@ class Order_product extends Model
 	{
 		return $this->belongsTo(Product::class, 'product_id', 'id');
 	}
-
+	public function orders()
+	{
+		return $this->belongsTo(Order::class, 'order_id', 'id');
+	}
 
 }
 

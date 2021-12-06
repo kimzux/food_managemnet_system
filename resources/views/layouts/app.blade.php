@@ -108,7 +108,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('search')}}">choose products</a>
                         <a class="collapse-item" href="{{route('order_detail')}}">Order Details</a>
-                        <a class="collapse-item" href="register.html">generate invoice</a>
+                        <a class="collapse-item" href="invoice">generate invoice</a>
                     </div>
             </li>
 

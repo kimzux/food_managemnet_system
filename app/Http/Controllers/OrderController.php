@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Order_product;
 use App\Stock;
 use App\Student;
 use Illuminate\Http\Request;
@@ -93,7 +94,7 @@ class OrderController extends Controller
     }
     public function view_order($id)
     {
-        //  $order=Order::findOrFail($id);
+        
      
          $order = Order::findOrFail($id);
         //  dd($order);

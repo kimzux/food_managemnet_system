@@ -23,6 +23,9 @@ Auth::routes();
 Route::get('/login2', function () {
     return view('log');
 });
+Route::get('/invoice', function () {
+    return view('orders.invoice');
+});
 
 Route::middleware(['auth'])->group(function () {
 

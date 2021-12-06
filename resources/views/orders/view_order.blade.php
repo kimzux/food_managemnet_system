@@ -13,7 +13,7 @@
            <b> Student Name:</b> {{ $order->student->full_name }}  <b>  //  </b>
            <b> Order No:</b>  {{ $order->order_no }} <br><br>
            <h5>List of the products taken</h5>
-           <table id="product_datatable" class="table table-striped">
+            <table id="product_datatable" class="table table-striped">
             <thead>
                 <tr>
                   <td>Product Name</td>
@@ -22,19 +22,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($order as $orders)
-                 <div class="section">
+                @foreach($order->products as $orderProduct)
                 <tr>
-                    <td>{{$orders->products->productName}}</td>
-                    <td>{{$orders->products->productcategory}}</td>
-                    <td>{{$orders->products->quantity_rec}}</td>
-                    {{-- <td>{{$product->productPrice}}</td> --}}
+                    <td>{{$orderProduct->product->productName}}</td>
+                    <td>{{$orderProduct->product->productcategory}}</td>
+                    <td>{{$orderProduct->quantity}}</td>   
                 </tr>
                  @endforeach
             </tbody>
-          </table>
-          
+          </table> 
+         
         </div>
     </div>
-
+    <td><a href="invoice"  class="btn btn-primary ml-3">generate invoice</a></td>
     @endsection
