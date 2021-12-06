@@ -28,7 +28,6 @@ class StockController extends Controller
         $productstock = new Stock();
         $productstock->product_id = request('productName');
         $productstock->quantity_rec = request('quantity_rec');
-        $productstock->price = request('price');
         $productstock->save();
         Alert::success('Success!', 'Successfully added');
         return redirect('/stock');
@@ -67,7 +66,6 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stock->quantity_rec = $request->input('quantity_rec');
-        $stock ->price= $request->input('price');
         $stock->save();
         Alert::success('Success!', 'Successfully updated');
         return back();
