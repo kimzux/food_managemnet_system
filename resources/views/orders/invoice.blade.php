@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
       <section class="mt-3">
@@ -63,4 +63,62 @@
             </div>
          </div>
   @endsection
+  @extends('layouts.app')
 
+  @section('content')
+      <style>
+          .uper {
+              margin-top: 40px;
+          }
+  
+      </style>
+  
+      <div class="card mb-3"  style="max-width: 50rem ">
+          <div class="card-body"  style="background-color:#f5f5f5;">
+              <div class="text-center">
+                  <h4>invoice</h4>
+               </div>
+               <div class="row">
+               <span class="mt-4">
+            <p> Date: {{ $order->date }} </p> </span>
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4 ">
+                 <span id="day"></span> : <span id="year"></span>
+              </div>
+  
+              <div class="ml-">
+                  <p> Student Name:</p> {{ $order->student->full_name }} 
+                  <p> Order No:</p>  {{ $order->order_no }}
+              </div>
+           </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+              
+             </div>
+               </div>
+             <h5>List of the products taken</h5>
+              <table id="product_datatable" class="table table-striped">
+              <thead>
+                  <tr>
+                    <td>Product Name</td>
+                    <td>Product category</td>
+                    <td>Product Quantiy</td>
+                    <td>Product Pice</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach($order->products as $orderProduct)
+                  <tr>
+                      <td>{{$orderProduct->product->productName}}</td>
+                      <td>{{$orderProduct->product->productcategory}}</td>
+                      <td>{{$orderProduct->quantity}}</td>  
+                      <td>{{$orderProduct->product->productPrice}}</td> 
+                  </tr>
+                   @endforeach
+              </tbody>
+            </table> 
+           
+          </div>
+      </div>
+      <td><a href="invoice"  class="btn btn-primary ml-3">generate invoice</a></td>
+      @endsection
+   --}}

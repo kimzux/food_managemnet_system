@@ -24,7 +24,7 @@ class OrderController extends Controller
 
         DB::beginTransaction();
 
-        $total_price = $cart->sum(fn ($item) => $item->product->productPrice ?? 0);
+        $total_price = $cart->sum(fn ($item) => $item->product->productPrice * $item->qnt);
 
         $order = Order::create([
             'student_id' => $student->id,

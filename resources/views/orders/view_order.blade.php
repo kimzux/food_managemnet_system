@@ -1,38 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .uper {
-            margin-top: 40px;
-        }
-
-    </style>
-
-    <div class="card mb-3"  style="max-width: 30rem ">
-        <div class="card-body">
-           <b> Student Name:</b> {{ $order->student->full_name }}  <b>  //  </b>
-           <b> Order No:</b>  {{ $order->order_no }} <br><br>
-           <h5>List of the products taken</h5>
-            <table id="product_datatable" class="table table-striped">
-            <thead>
-                <tr>
-                  <td>Product Name</td>
-                  <td>Product category</td>
-                  <td>Product Quantiy</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($order->products as $orderProduct)
-                <tr>
-                    <td>{{$orderProduct->product->productName}}</td>
-                    <td>{{$orderProduct->product->productcategory}}</td>
-                    <td>{{$orderProduct->quantity}}</td>   
-                </tr>
-                 @endforeach
-            </tbody>
-          </table> 
-         
-        </div>
-    </div>
-    <td><a href="invoice"  class="btn btn-primary ml-3">generate invoice</a></td>
-    @endsection
+      <section class="mt-3">
+         <div class="container-fluid">
+         {{-- <h6 class="text-center"> Shine Metro Mkadi Naka (New - Delhi)</h6> --}}
+            <div class="col-md-7  mt-4" style="background-color:#f5f5f5;">
+               <div class="p-4">
+                  <div class="text-center">
+                     <h4>invoice</h4>
+                  </div>
+                  <span class="mt-4"> Date : {{ $order->date }} </span>
+                  <div class="row">
+                     <div class="col-xs-6 col-sm-6 col-md-6 ">
+                     </div>
+                     <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                        <p> Student Name: {{ $order->student->full_name }} </p>
+                        <p> Order No:  {{ $order->order_no }}</p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     </span>
+                     <table id="invoice_table" class="table">
+                        <thead>
+                           <tr>
+                           
+                              <th>Product Name</th>
+                              <th>Category</th>
+                              <th >Quantity</th>
+                              <th >Price</th>
+                           </tr>
+                        </thead>
+                       
+                        <tbody>
+                            @foreach($order->products as $orderProduct)
+                            <tr>
+                                <td>{{$orderProduct->product->productName}}</td>
+                                <td>{{$orderProduct->product->productcategory}}</td>
+                                <td>{{$orderProduct->quantity}}</td>  
+                                <td>{{$orderProduct->product->productPrice}}</td> 
+                            </tr>
+                             @endforeach
+                           <td class="text-right text-dark" >
+                                <h5><strong>Total: {{ $order->total_price }}  </strong></h5>
+                           </td>
+                        </tr>
+                    </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <td><a href="invoice"  class="btn btn-primary ml-4">generate invoice</a></td>
+      </section>
+  @endsection

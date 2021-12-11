@@ -6,11 +6,6 @@
     margin-top: 40px;
   }
 </style>
-<div class="container">
-<form style="display: inline" action="create" method="get">
-  <button type="submit" class="btn btn-primary">Click here to add product</button>
-</form>
-</div>
 <div class="uper">
   @if(session()->get('success'))
     <div class="alert alert-success">
@@ -39,7 +34,7 @@
             <td>
               <div class="d-flex">
                 <a href="{{ route('view_order', $orders->id)}}" class="btn btn-success">view</a>
-                
+                <a href="{{ route('view_order', $orders->id)}}" class="ml-4 btn btn-primary">generate invoice</a>
               </div>
             </td>
         </tr>

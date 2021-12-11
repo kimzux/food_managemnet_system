@@ -87,7 +87,7 @@ class ProductController extends Controller
 
     public function order(Student $student)
     {
-        $products = Product::select('id', 'productName')->whereHas('stock', function (Builder $has) {
+        $products = Product::select('id', 'productName','productPrice')->whereHas('stock', function (Builder $has) {
             $has->where('quantity_rec',  '>', 0);
         })->with(['stock' => function ($stock) {
             $stock->sumQuantity();

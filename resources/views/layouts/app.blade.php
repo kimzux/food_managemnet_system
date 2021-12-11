@@ -108,17 +108,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('search')}}">choose products</a>
                         <a class="collapse-item" href="{{route('order_detail')}}">Order Details</a>
-                        <a class="collapse-item" href="invoice">generate invoice</a>
                     </div>
             </li>
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>check payment</span></a>
-            </li>
 
             <!-- Nav Item - Tables -->
 
