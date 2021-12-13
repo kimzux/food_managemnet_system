@@ -50,6 +50,7 @@
                </div>
             </div>
          </div>
-         <td><a href="invoice"  class="btn btn-primary ml-4">generate invoice</a></td>
+         <td><a href="{{ route('invoice_generate', $order->id) }}"  class="btn btn-primary ml-4">generate invoice</a></td>
       </section>
   @endsection
+  

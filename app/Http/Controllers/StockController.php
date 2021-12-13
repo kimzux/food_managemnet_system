@@ -9,6 +9,7 @@ use App\Stock;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -19,12 +20,14 @@ class StockController extends Controller
     // }
     public function stock_manage()
     {
+        abort_if(Auth::user()->cannot('View stock'), 403, 'Access Denied');
         $stock = Product::select('id', 'productName')->get();
         return view('stockproduct.createstock', compact('stock'));
     }
 
     public function store(Request $request)
     {
+        abort_if(Auth::user()->cannot('Create stock'), 403, 'Access Denied');
         $productstock = new Stock();
         $productstock->product_id = request('productName');
         $productstock->quantity_rec = request('quantity_rec');
@@ -34,6 +37,7 @@ class StockController extends Controller
     }
     public function index()
     {
+        abort_if(Auth::user()->cannot('View stock'), 403, 'Access Denied');
 
         $stocks = Stock::with('product')->sumQuantity()->get();
 
@@ -41,6 +45,7 @@ class StockController extends Controller
     }
     public function destroy($id)
     {
+        abort_if(Auth::user()->cannot('delete stock'), 403, 'Access Denied');
         $stock = Stock::findOrFail($id);
         $stock->delete();
         Alert::success('Success!', 'Successfully deleted');
@@ -49,6 +54,7 @@ class StockController extends Controller
     }
     public function edit($id)
     {
+        abort_if(Auth::user()->cannot('Edit stock'), 403, 'Access Denied');
         $stock = Stock::findOrFail($id);
 
         // $stock = Product::select('id', 'productName')->get();
@@ -57,6 +63,7 @@ class StockController extends Controller
     }
     public function detail($id)
     {
+        abort_if(Auth::user()->cannot('Stock detail'), 403, 'Access Denied');
         // $product =Product::findOrFail('productName');
         $stocks = Stock::with('product')->where('product_id', $id)->get();
 

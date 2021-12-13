@@ -10,11 +10,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function store(Request $request)
     {
+        abort_if(Auth::user()->cannot('Create product'), 403, 'Access Denied');
         $check = Product::where('productName',  request('productName'))->first();
         if (empty($check)) {
             $validatedData = $request->validate([
@@ -28,11 +30,12 @@ class ProductController extends Controller
             //   return redirect('/foodie')->with('success', 'Corona Case is successfully saved');
         } else {
             Alert::warning('Warning', 'product already exist');
-            return redirect()->back()->withWarningMessage('Product already exist');
+            return back();
         }
     }
     public function index()
     {
+        abort_if(Auth::user()->cannot('View products'), 403, 'Access Denied');
         $product = Product::all();
 
         return view('products.index', compact('product'));
@@ -40,6 +43,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        abort_if(Auth::user()->cannot('Edit product'), 403, 'Access Denied');
         $products = Product::findOrFail($id);
 
         return view('products.edit', compact('products'));
@@ -78,10 +82,11 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        abort_if(Auth::user()->cannot('delete product'), 403, 'Access Denied');
         $product = product::findOrFail($id);
         $product->delete();
         Alert::success('Success!', 'Successfully deleted');
-        return redirect('/foodie')->withSuccessMessage('Successfully deleted');
+        return back();
         // return redirect('/foodie')->with('success', 'Corona Case Data is successfully deleted');
     }
 
@@ -114,7 +119,7 @@ class ProductController extends Controller
         // // $student->image= request('image')->nullable
         $order_product->save();
         Alert::success('Success!', 'Successfully added');
-        return redirect()->back()->withSuccessMessage('success', 'Data Saved');
+        return back();
     }
 
 

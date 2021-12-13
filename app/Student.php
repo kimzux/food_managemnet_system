@@ -4,9 +4,11 @@ namespace App;
 use Food;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Student extends Model
 {
+
     protected $table = 'student';
     
 	protected $fillable = [
@@ -27,5 +29,13 @@ class Student extends Model
 	{
 		return "{$this->first_name} {$this->last_name}";
 	}
+	public function orders(){
+
+		return $this->hasMany('App\Order');
+	
+	}
+	
+		
+	
 
 }

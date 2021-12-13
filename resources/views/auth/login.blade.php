@@ -51,7 +51,7 @@
                         </div>
 
                                         <input class="btn btn-primary btn-block mb-2" type="submit" name="submit" value="Login">
-                                        <p class="text-muted text-center">Have no account? <a href="register">Register here.</a></p>
+                                     
                                         
                                     </form>
                                 </div>

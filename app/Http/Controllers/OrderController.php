@@ -6,6 +6,9 @@ use App\Order;
 use App\Order_product;
 use App\Stock;
 use App\Student;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use PDF;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -86,7 +89,8 @@ class OrderController extends Controller
         return redirect(route('search'));
     }
     public function index()
-    {
+    { 
+        abort_if(Auth::user()->cannot('View choose product'), 403, 'Access Denied');
 
         $order = Order::with(['student'])->get();
 
@@ -94,9 +98,18 @@ class OrderController extends Controller
     }
     public function view_order($id)
     {
-    
+        abort_if(Auth::user()->cannot('View order details'), 403, 'Access Denied');
         $order = Order::findOrFail($id);
         //  dd($order);
         return view('orders.view_order', compact('order'));
+    }
+    public function invoice_generate($id)
+    {   
+        abort_if(Auth::user()->cannot('Invoice'), 403, 'Access Denied');
+        $order = Order::findOrFail($id);
+      
+        $pdf = PDF::loadView('orders.invoice', compact('order'));
+  
+        return $pdf->stream('invoice.pdf');
     }
 }

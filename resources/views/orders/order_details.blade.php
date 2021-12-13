@@ -34,7 +34,7 @@
             <td>
               <div class="d-flex">
                 <a href="{{ route('view_order', $orders->id)}}" class="btn btn-success">view</a>
-                <a href="{{ route('view_order', $orders->id)}}" class="ml-4 btn btn-primary">generate invoice</a>
+                <a href="{{ route('invoice_generate', $orders->id)}}" class="ml-4 btn btn-primary">generate invoice</a>
               </div>
             </td>
         </tr>

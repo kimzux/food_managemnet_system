@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,7 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/login2', function () {
     return view('log');
@@ -30,7 +32,6 @@ Route::get('/invoice', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home'); 
-    Route::get('/home', 'HomeController@total_student')->name('home'); 
  
 
     Route::get('/addstudent', function () {
@@ -66,6 +67,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/view_order/{id}', 'OrderController@view_order')->name('view_order');
 
     // Route::get('/stock_details', 'StockController@edit')->name('edit');
+    Route::get('/pdf',function(){
+        return view('invoice');
+     });
     
+     Route::get('generate-invoice/{id}','OrderController@invoice_generate')->name('invoice_generate');
+
+     Route::prefix('user-management')->group(function(){
+         Route::resource('roles', 'RoleController')->except(['show', 'create']);
+         Route::put('users/roles/{user}', 'UserController@updateRole')->name('users.roles.update');
+         Route::resource('users', 'UserController');
+     });
 });
 

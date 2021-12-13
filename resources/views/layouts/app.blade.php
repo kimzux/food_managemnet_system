@@ -62,65 +62,101 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Request::url() == url('/home') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('home')}}">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            @can('View Dashboard')
+                <li class="nav-item {{ Request::url() == url('/home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            @endcan
 
             <!-- Divider -->
 
 
+            @can('View Students')
 
-
-            <li class="nav-item {{ Request::url() == url('students') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="{{route('student')}}">
-                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                    <span>Students</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item {{ Request::url() == url('foodie') ? 'active' : '' }}">
-               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                      <i class="fas fa-fw fa-wrench"></i>
-                      <span>Product details</span>
+                <li class="nav-item {{ Request::url() == url('students') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="{{ route('student') }}">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        <span>Students</span>
                     </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                      <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('foodie')}}">
-                            Products
-                        </a>
-                        <a class="collapse-item" href="stock">stock</a>
-                      </div>
+                </li>
+            @endcan
+            <!-- Nav Item - Utilities Collapse Menu -->
+          
+                <li class="nav-item {{ Request::url() == url('foodie') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Product details</span>
+                    </a>
+                    @canany(['View products','View stock'])
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @can('View products')
+                            <a class="collapse-item" href="{{ route('foodie') }}">
+                                Products
+                            </a>
+                            @endcan
+                            @can('View stock')
+                            <a class="collapse-item" href="{{ route('stock.index') }}">stock</a>
+                            @endcan
+                        </div>
                     </div>
-                  </li>
-             
+                </li>
+            @endcan
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ Request::url() == url('studentSearch') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="{{route('search')}}" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" >
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>sales Details</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('search')}}">choose products</a>
-                        <a class="collapse-item" href="{{route('order_detail')}}">Order Details</a>
+           
+                <li class="nav-item {{ Request::url() == url('studentSearch') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="{{ route('search') }}" data-toggle="collapse"
+                        data-target="#collapsePages" aria-expanded="true">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>sales Details</span>
+                    </a>
+                    @canany(['View choose product','Order details'])
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @can('View choose product')
+                            <a class="collapse-item" href="{{ route('search') }}">choose products</a>
+                            @endcan
+                            @can('Order details')
+                            <a class="collapse-item" href="{{ route('order_detail') }}">Order Details</a>
+                            @endcan
+                        </div>
                     </div>
-            </li>
+                </li>
+            @endcan
 
 
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
 
-            <li class="nav-item  {{ Request::url() == url('check_due') ? 'active' : '' }}">
-                <a class="nav-link" href="check_due">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>User manager</span></a>
-            </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            @canany(['View users','View role'])
+                <li class="nav-item {{ Request::url() == url('user-management') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+                        aria-expanded="true" aria-controls="collapseUser">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>user-management</span>
+                    </a>
+                   
+                    <div id="collapseUser" class="collapse" aria-labelledby="headingUser"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @can('View users')
+                            <a class="collapse-item" href="{{ route('users.index') }}">users</a>
+                            @endcan
+                            @can('View role')
+                            <a class="collapse-item" href="{{ route('roles.index') }}">roles</a>
+                            @endcan
+                        </div>
+                    </div>
+                </li>
+            @endcan
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -148,7 +184,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                  
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -344,8 +380,11 @@
                     @include('sweetalert::alert')
                     @yield('content')
                 </main>
-
+               
             </div>
+        </div>
+    </div>
+
 </body>
 
 <!-- Scripts -->
@@ -354,8 +393,9 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Page level custom scripts -->
 
-<script src="{{ asset('js/app.js') }}" defer></script>
 @stack('scripts')
 
 </html>

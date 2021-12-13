@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,10 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/home');
-    }
-    public function total_student()
-    {
+        abort_if(Auth::user()->cannot('View Dashboard'), 403, 'Access Denied');
+        
         $this->data['total_students'] = Student::all()->count();
         return view('home', $this->data);
     }
