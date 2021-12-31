@@ -42,7 +42,92 @@ class DatabaseSeeder extends Seeder
                 'guard_name' => 'web'
             ],
             [
-                'name' => 'VCreate product',
+                'name' => 'Create product',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'Edit product',
+                'guard_name' => 'web'
+            ],
+            
+              [
+                'name' => 'delete product',
+                'guard_name' => 'web'
+            ],
+              [
+                'name' => 'View stock',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create stock',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'Stock detail',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'Edit stock',
+                'guard_name' => 'web'
+            ],
+              [
+                'name' => 'View choose product',
+                'guard_name' => 'web'
+            ],
+              [
+                'name' => 'Choose product',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'Order details',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'View order details',
+                'guard_name' => 'web'
+            ],
+               [
+                'name' => 'Invoice',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Create user',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View users',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Deleta User',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Edit user',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'Add user role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'View role',
+                'guard_name' => 'web'
+            ],
+            [
+                'name' => 'add role',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'delete role',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'edit role',
+                'guard_name' => 'web'
+            ],
+             [
+                'name' => 'delete stock',
                 'guard_name' => 'web'
             ],
         ]);
