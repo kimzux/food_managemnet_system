@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Student_parent;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Imports\StudentsImport;
@@ -117,4 +118,21 @@ class StudentController extends Controller
     Alert::success('Success!', 'Successfully updated');
     return redirect('/addstudent');
   }
+  
+
+public function parents()
+  {
+  $student = Student::select('id', 'parent_name')->get();
+  return view('student.add_balance',compact('student'));
+  } //
+  public function store_parent(Request $request)
+  {
+
+    $parent = new Student_parent();
+    $parent->student_id = request('parent_name');
+    $parent->acc_balance = request('acc_balance');
+    $parent->save();
+    Alert::success('Success!', 'Successfully added');
+    return back();
+}
 }

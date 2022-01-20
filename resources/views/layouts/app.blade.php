@@ -83,6 +83,14 @@
                     </a>
                 </li>
             @endcan
+           
+                <li class="nav-item {{ Request::url() == url('add_balance') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="add_balance">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        <span>Parent</span>
+                    </a>
+                </li>
+            
             <!-- Nav Item - Utilities Collapse Menu -->
           
                 <li class="nav-item {{ Request::url() == url('foodie') ? 'active' : '' }}">

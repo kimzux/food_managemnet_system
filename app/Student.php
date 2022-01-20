@@ -2,7 +2,7 @@
 
 namespace App;
 use Food;
-
+use student_parent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,7 +35,14 @@ class Student extends Model
 	
 	}
 	
-		
+	public function student_parent()
+	{
+		// 'App\User','user_id'
+
+		return $this->hasOne('App\Student_parent');
+	
+	
+	}
 	
 
 }
